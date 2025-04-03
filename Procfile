@@ -1,1 +1,1 @@
-web: gunicorn OneSas.wsgi --log-file -
+web: gunicorn OneSas.wsgi --bind 0.0.0.0:$PORT
