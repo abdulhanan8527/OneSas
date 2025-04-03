@@ -18,7 +18,7 @@
       },
       {
         "src": "/(.*)",
-        "dest": "OneSas/OneSas/wsgi.py"
+        "dest": "OneSas/wsgi.py"
       }
     ]
   }
