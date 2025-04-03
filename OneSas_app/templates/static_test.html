@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+    <title>STATIC FILES EMERGENCY TEST</title>
+    <!-- Test all file types -->
+    <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+    <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+    <img src="{% static 'img/test.jpg' %}">
+</head>
+<body style="padding: 2rem;">
+    <h1>Static Files Diagnostic</h1>
+    
+    <div class="alert alert-success" id="css-test">
+        If green, CSS loaded successfully
+    </div>
+    
+    <script>
+    // JS test
+    document.getElementById('css-test').innerHTML += 
+        '<br><br>JS is working! Current time: ' + new Date();
+    
+    // Image test
+    const img = new Image();
+    img.src = "{% static 'img/test.jpg' %}";
+    img.onload = function() {
+        document.body.appendChild(img);
+    };
+    </script>
+    
+    <pre>{% now "r" %}</pre>
+</body>
+</html>
