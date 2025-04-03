@@ -47,7 +47,8 @@ ROOT_URLCONF = 'OneSas.urls'
 WSGI_APPLICATION = 'OneSas.wsgi.application'
 
 # ===== MySQL Database Configuration =====
-if os.environ.get('DB_ENGINE') == 'mysql':
+if os.environ.get('RAILWAY_ENVIRONMENT'):
+    # Production on Railway
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.mysql',
@@ -58,18 +59,43 @@ if os.environ.get('DB_ENGINE') == 'mysql':
             'PORT': os.environ.get('MYSQLPORT', '3306'),
             'OPTIONS': {
                 'charset': 'utf8mb4',
-                'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
+                'sql_mode': 'STRICT_TRANS_TABLES',
             }
         }
     }
 else:
-    # Fallback to SQLite for local development
+    # Local development
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
             'NAME': BASE_DIR / 'db.sqlite3',
         }
     }
+
+# # ===== MySQL Database Configuration =====
+# if os.environ.get('DB_ENGINE') == 'mysql':
+#     DATABASES = {
+#         'default': {
+#             'ENGINE': 'django.db.backends.mysql',
+#             'NAME': os.environ.get('MYSQLDATABASE'),
+#             'USER': os.environ.get('MYSQLUSER'),
+#             'PASSWORD': os.environ.get('MYSQLPASSWORD'),
+#             'HOST': os.environ.get('MYSQLHOST'),
+#             'PORT': os.environ.get('MYSQLPORT', '3306'),
+#             'OPTIONS': {
+#                 'charset': 'utf8mb4',
+#                 'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
+#             }
+#         }
+#     }
+# else:
+#     # Fallback to SQLite for local development
+#     DATABASES = {
+#         'default': {
+#             'ENGINE': 'django.db.backends.sqlite3',
+#             'NAME': BASE_DIR / 'db.sqlite3',
+#         }
+#     }
 
 # ===== Static & Media Files =====
 STATIC_URL = '/static/'
