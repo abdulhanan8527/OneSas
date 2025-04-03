@@ -46,7 +46,7 @@ MIDDLEWARE = [
 ROOT_URLCONF = 'OneSas.urls'
 WSGI_APPLICATION = 'OneSas.wsgi.application'
 
-# ===== MySQL Database Configuration =====
+# ===== Database Configuration =====
 if os.environ.get('RAILWAY_ENVIRONMENT'):
     # Production on Railway
     DATABASES = {
