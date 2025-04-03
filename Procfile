@@ -1,0 +1,1 @@
+web: gunicorn OneSas.wsgi --log-file -
