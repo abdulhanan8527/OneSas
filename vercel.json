@@ -14,11 +14,11 @@
     "routes": [
       {
         "src": "/static/(.*)",
-        "dest": "/OneSas/static/$1"
+        "dest": "/OneSas/OneSas/static/$1"
       },
       {
         "src": "/(.*)",
-        "dest": "OneSas/wsgi.py"
+        "dest": "OneSas/OneSas/wsgi.py"
       }
     ]
   }
