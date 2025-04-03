@@ -13,7 +13,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-fallback-key-for-dev-only')
 DEBUG = os.environ.get('DEBUG', 'False') == 'True'
 # ALLOWED_HOSTS = ['1sas.co', 'www.1sas.co', '*.railway.app']
-ALLOWED_HOSTS = ['1sas.co', 'www.1sas.co', '.vercel.app']
+ALLOWED_HOSTS = ['1sas.co', 'www.1sas.co', '.vercel.app', '.now.sh']
 
 # CSRF_TRUSTED_ORIGINS = ['https://1sas.co', 'https://www.1sas.co', 'https://*.railway.app']
 
