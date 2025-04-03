@@ -9,12 +9,19 @@
           "runtime": "python3.9",
           "installCommand": "pip install -r requirements.txt"
         }
+      },
+      {
+        "src": "build_files.sh",
+        "use": "@vercel/static-build",
+        "config": {
+          "distDir": "staticfiles" 
+        }
       }
     ],
     "routes": [
       {
         "src": "/static/(.*)",
-        "dest": "/OneSas/OneSas/static/$1"
+        "dest": "/static/$1"  
       },
       {
         "src": "/(.*)",
