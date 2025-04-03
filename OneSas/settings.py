@@ -10,10 +10,12 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # ===== Security =====
-SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-fallback-key-for-dev-only')
+# SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-fallback-key-for-dev-only')
 DEBUG = os.environ.get('DEBUG', 'False') == 'True'
-ALLOWED_HOSTS = ['1sas.co', 'www.1sas.co', '*.railway.app']
-CSRF_TRUSTED_ORIGINS = ['https://1sas.co', 'https://www.1sas.co', 'https://*.railway.app']
+# ALLOWED_HOSTS = ['1sas.co', 'www.1sas.co', '*.railway.app']
+ALLOWED_HOSTS = ['1sas.co', 'www.1sas.co', '.vercel.app']
+
+# CSRF_TRUSTED_ORIGINS = ['https://1sas.co', 'https://www.1sas.co', 'https://*.railway.app']
 
 # HTTPS Settings
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
@@ -53,21 +55,6 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-
-# Override for Railway production
-if os.environ.get('RAILWAY_ENVIRONMENT'):
-    DATABASES['default'] = {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': os.environ.get('MYSQLDATABASE', 'railway'),
-        'USER': os.environ.get('MYSQLUSER', 'root'),
-        'PASSWORD': os.environ.get('MYSQLPASSWORD', ''),
-        'HOST': os.environ.get('MYSQLHOST', 'mysql'),
-        'PORT': os.environ.get('MYSQLPORT', '3306'),
-        'OPTIONS': {
-            'charset': 'utf8mb4',
-            'sql_mode': 'STRICT_TRANS_TABLES',
-        }
-    }
 
 # ===== Static & Media Files =====
 STATIC_URL = '/static/'
