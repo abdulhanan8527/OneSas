@@ -1,22 +1,24 @@
 {
-    "version": 2,
-    "builds": [
-      {
-        "src": "OneSas/wsgi.py",
-        "use": "@vercel/python",
-        "config": { "maxLambdaSize": "15mb", "runtime": "python3.9",
-            "installCommand": "pip install -r requirements.txt && python manage.py collectstatic --noinput"
-        }
+  "version": 2,
+  "builds": [
+    {
+      "src": "OneSas/wsgi.py",
+      "use": "@vercel/python",
+      "config": {
+        "runtime": "python3.9",
+        "installCommand": "pip install -r requirements.txt",
+        "startCommand": "gunicorn OneSas.wsgi --bind 0.0.0.0:$PORT"
       }
-    ],
-    "routes": [
-      {
-        "src": "/static/(.*)",
-        "dest": "/static/$1"
-      },
-      {
-        "src": "/(.*)",
-        "dest": "OneSas/wsgi.py"
-      }
-    ]
-  }
+    }
+  ],
+  "routes": [
+    {
+      "src": "/static/(.*)",
+      "dest": "/static/$1"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "OneSas/wsgi.py"
+    }
+  ]
+}
