@@ -136,7 +136,7 @@ USE_TZ = True
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-STATIC_URL = '/static/'
+# STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # For production
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'OneSas_app/static'),
@@ -157,10 +157,16 @@ AWS_S3_FILE_OVERWRITE = False
 STORAGES = {
 
     "default": {
-        "BACKEND" : "storages.backends.s3boto3.S3StaticStorage",
+        "BACKEND" : "storages.backends.s3.S3Storage",
     },
 
     "staticfiles": {
-        "BACKEND" : "storages.backends.s3boto3.S3StaticStorage",
+        "BACKEND" : "storages.backends.s3.S3Storage",
     },
 }
+
+AWS_S3_OBJECT_PARAMETERS = {
+    'CacheControl': 'max-age=86400',
+}
+AWS_LOCATION = 'static'  # Folder in bucket for static files
+STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{AWS_LOCATION}/'
