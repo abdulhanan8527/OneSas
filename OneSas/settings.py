@@ -170,3 +170,23 @@ AWS_S3_OBJECT_PARAMETERS = {
 }
 AWS_LOCATION = 'static'  # Folder in bucket for static files
 STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{AWS_LOCATION}/'
+
+#Email Configuration for Gmail
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_HOST = 'smtp.gmail.com'
+# EMAIL_PORT = 587
+# EMAIL_USE_TLS = True
+# EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')  # Your Gmail address
+# EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')  # IMPORTANT: Use App Password, not your regular password
+# DEFAULT_FROM_EMAIL = os.getenv('EMAIL_HOST_USER')  # Should match EMAIL_HOST_USER
+
+CALENDLY_LINK = os.getenv('CALENDLY_LINK')
+
+# settings.py
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp-relay.brevo.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = os.getenv('BREVO_EMAIL')  # Must match verified sender
+EMAIL_HOST_USER = os.getenv('BREVO_EMAIL')
+EMAIL_HOST_PASSWORD = os.getenv('BREVO_SMTP_KEY')

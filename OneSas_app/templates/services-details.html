@@ -110,47 +110,36 @@
 
     <!-- Service Details Section -->
     <section id="service-details" class="service-details section">
-
       <div class="container">
-
         <div class="row gy-4">
-
           <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100">
             <div class="services-list">
-              <a href="#" class="active">Web Design</a>
-              <a href="#">Software Development</a>
-              <a href="#">Product Management</a>
-              <a href="#">Graphic Design</a>
-              <a href="#">Marketing</a>
+              <a href="{% url 'service_detail' 'accounting' %}" {% if slug == 'accounting' %}class="active"{% endif %}>Accounting</a>
+              <a href="{% url 'service_detail' 'bookkeeping' %}" {% if slug == 'bookkeeping' %}class="active"{% endif %}>Bookkeeping</a>
+              <a href="{% url 'service_detail' 'payroll-management' %}" {% if slug == 'payroll-management' %}class="active"{% endif %}>Payroll Management</a>
+              <a href="{% url 'service_detail' 'tax' %}" {% if slug == 'tax' %}class="active"{% endif %}>Tax</a>
             </div>
-
-            <h4>Enim qui eos rerum in delectus</h4>
-            <p>Nam voluptatem quasi numquam quas fugiat ex temporibus quo est. Quia aut quam quod facere ut non occaecati ut aut. Nesciunt mollitia illum tempore corrupti sed eum reiciendis. Maxime modi rerum.</p>
+            <h4>{{ service_name }} Services</h4>
+            <p>Detailed information about our {{ service_name }} services will be displayed here.</p>
           </div>
 
           <div class="col-lg-8" data-aos="fade-up" data-aos-delay="200">
-            <img src="assets/img/services/services-4.webp" alt="" class="img-fluid services-img">
-            <h3>Temporibus et in vero dicta aut eius lidero plastis trand lined voluptas dolorem ut voluptas</h3>
+            <img src="assets/img/services/services-4.webp" alt="{{ service_name }}" class="img-fluid services-img">
+            <h3>Comprehensive {{ service_name }} Solutions</h3>
             <p>
-              Blanditiis voluptate odit ex error ea sed officiis deserunt. Cupiditate non consequatur et doloremque consequuntur. Accusantium labore reprehenderit error temporibus saepe perferendis fuga doloribus vero. Qui omnis quo sit. Dolorem architecto eum et quos deleniti officia qui.
+              We provide top-quality {{ service_name }} services tailored to your business needs. Our team of experts will ensure your financial operations run smoothly and efficiently.
             </p>
             <ul>
-              <li><i class="bi bi-check-circle"></i> <span>Aut eum totam accusantium voluptatem.</span></li>
-              <li><i class="bi bi-check-circle"></i> <span>Assumenda et porro nisi nihil nesciunt voluptatibus.</span></li>
-              <li><i class="bi bi-check-circle"></i> <span>Ullamco laboris nisi ut aliquip ex ea</span></li>
+              <li><i class="bi bi-check-circle"></i> <span>Professional {{ service_name }} services</span></li>
+              <li><i class="bi bi-check-circle"></i> <span>Customized solutions for your business</span></li>
+              <li><i class="bi bi-check-circle"></i> <span>Experienced and certified professionals</span></li>
             </ul>
             <p>
-              Est reprehenderit voluptatem necessitatibus asperiores neque sed ea illo. Deleniti quam sequi optio iste veniam repellat odit. Aut pariatur itaque nesciunt fuga.
-            </p>
-            <p>
-              Sunt rem odit accusantium omnis perspiciatis officia. Laboriosam aut consequuntur recusandae mollitia doloremque est architecto cupiditate ullam. Quia est ut occaecati fuga. Distinctio ex repellendus eveniet velit sint quia sapiente cumque. Et ipsa perferendis ut nihil. Laboriosam vel voluptates tenetur nostrum. Eaque iusto cupiditate et totam et quia dolorum in. Sunt molestiae ipsum at consequatur vero. Architecto ut pariatur autem ad non cumque nesciunt qui maxime. Sunt eum quia impedit dolore alias explicabo ea.
+              Contact us today to learn more about how our {{ service_name }} services can benefit your business.
             </p>
           </div>
-
         </div>
-
       </div>
-
     </section><!-- /Service Details Section -->
 
   </main>
