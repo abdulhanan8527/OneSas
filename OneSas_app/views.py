@@ -8,6 +8,8 @@ from django.conf import settings
 import smtplib
 from django.contrib import messages
 from .utils.brevo_email import send_brevo_email
+# from supabase import create_client, Client
+# import os
 
 # Create your views here.
 
@@ -165,3 +167,16 @@ def service_detail(request, slug):
         'service_name': slug.replace('-', ' ').title(),
     }
     return render(request, 'services-details.html', context)
+
+# def upload_to_supabase(file, file_path):
+#     supabase_url = os.getenv('SUPABASE_URL')
+#     supabase_key = os.getenv('SUPABASE_KEY')
+#     supabase: Client = create_client(supabase_url, supabase_key)
+    
+#     # Upload file to Supabase storage
+#     response = supabase.storage.from_('one-sas').upload(
+#         file_path, 
+#         file.read(),
+#         {"content-type": file.content_type}
+#     )
+#     return response

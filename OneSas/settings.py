@@ -102,14 +102,27 @@ WSGI_APPLICATION = 'OneSas.wsgi.application'
 
 # AWS Database with Postgresql
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': os.getenv('AWSDBNAME'),
+#         'USER': os.getenv('AWSDBUSER'),
+#         'PASSWORD': os.getenv('AWSDBPASS'),
+#         'HOST': os.getenv('AWSDBHOST'),
+#         'PORT': os.getenv('AWSDBPORT'),
+#     }
+# }
+
+# Supabase Database with Postgresql
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.getenv('AWSDBNAME'),
-        'USER': os.getenv('AWSDBUSER'),
-        'PASSWORD': os.getenv('AWSDBPASS'),
-        'HOST': os.getenv('AWSDBHOST'),
-        'PORT': os.getenv('AWSDBPORT'),
+        'NAME': os.getenv('DB_NAME', 'postgres'),
+        'USER': os.getenv('DB_USER', 'postgres'),
+        'PASSWORD': os.getenv('DB_PASSWORD'),
+        'HOST': os.getenv('DB_HOST'),
+        'PORT': os.getenv('DB_PORT', '5432'),
     }
 }
 
@@ -150,10 +163,17 @@ USE_TZ = True
 # STATIC_URL = '/static/'
 # STATICFILES_DIRS = [BASE_DIR / "OneSas_app/static"]
 
+# Supabase storage for storing media and static files
+SUPABASE_URL = os.environ.get("SUPABASE_URL")
+SUPABASE_KEY = os.environ.get("SUPABASE_KEY")
+SUPABASE_BUCKET = "one-sas"  # Replace with your actual bucket name
+
+DEFAULT_FILE_STORAGE = 'OneSas.supabase_storage.SupabaseStorage'
+
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-# STATIC_URL = '/static/'
+STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # For production
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'OneSas_app/static'),
@@ -164,29 +184,29 @@ STATICFILES_DIRS = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-AWS_ACCESS_KEY_ID = os.getenv('AWS_ACCESS_KEY_ID')
-AWS_SECRET_ACCESS_KEY = os.getenv('AWS_SECRET_ACCESS_KEY')
-AWS_STORAGE_BUCKET_NAME = os.getenv('AWS_STORAGE_BUCKET_NAME')
-AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
-AWS_S3_FILE_OVERWRITE = False
+# AWS_ACCESS_KEY_ID = os.getenv('AWS_ACCESS_KEY_ID')
+# AWS_SECRET_ACCESS_KEY = os.getenv('AWS_SECRET_ACCESS_KEY')
+# AWS_STORAGE_BUCKET_NAME = os.getenv('AWS_STORAGE_BUCKET_NAME')
+# AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
+# AWS_S3_FILE_OVERWRITE = False
 
 
-STORAGES = {
+# STORAGES = {
 
-    "default": {
-        "BACKEND" : "storages.backends.s3.S3Storage",
-    },
+#     "default": {
+#         "BACKEND" : "storages.backends.s3.S3Storage",
+#     },
 
-    "staticfiles": {
-        "BACKEND" : "storages.backends.s3.S3Storage",
-    },
-}
+#     "staticfiles": {
+#         "BACKEND" : "storages.backends.s3.S3Storage",
+#     },
+# }
 
-AWS_S3_OBJECT_PARAMETERS = {
-    'CacheControl': 'max-age=86400',
-}
-AWS_LOCATION = 'static'  # Folder in bucket for static files
-STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{AWS_LOCATION}/'
+# AWS_S3_OBJECT_PARAMETERS = {
+#     'CacheControl': 'max-age=86400',
+# }
+# AWS_LOCATION = 'static'  # Folder in bucket for static files
+# STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{AWS_LOCATION}/'
 
 #Email Configuration for Gmail
 # EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
