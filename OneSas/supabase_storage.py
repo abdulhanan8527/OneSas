@@ -53,23 +53,23 @@ class SupabaseStorage(Storage):
             normalized_name = self._normalize_path(name)
             url = f"{self.supabase_url}/storage/v1/object/{self.bucket_name}/{normalized_name}"
             
-            # Ensure we're at the beginning of the file
-            if hasattr(content, 'seek') and hasattr(content, 'tell'):
-                if content.tell() > 0:
-                    content.seek(0)
-            
-            file_content = content.read()
+            # Read the file content directly from memory
+            if hasattr(content, 'read'):
+                file_content = content.read()
+            else:
+                file_content = content
             
             # Determine content type
             content_type = getattr(content, 'content_type', 'application/octet-stream')
             if hasattr(content, 'name'):
-                if content.name.lower().endswith(('.jpg', '.jpeg')):
+                filename = content.name.lower()
+                if filename.endswith(('.jpg', '.jpeg')):
                     content_type = 'image/jpeg'
-                elif content.name.lower().endswith('.png'):
+                elif filename.endswith('.png'):
                     content_type = 'image/png'
-                elif content.name.lower().endswith('.gif'):
+                elif filename.endswith('.gif'):
                     content_type = 'image/gif'
-                elif content.name.lower().endswith('.webp'):
+                elif filename.endswith('.webp'):
                     content_type = 'image/webp'
             
             headers = self._get_headers(content_type)
