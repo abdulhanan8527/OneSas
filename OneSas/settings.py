@@ -46,6 +46,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',  # Add this
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -187,7 +188,7 @@ STORAGES = {
         "BACKEND": "OneSas.supabase_storage.SupabaseStorage",
     },
     "staticfiles": {
-        "BACKEND": "OneSas.supabase_storage.SupabaseStorage",
+        "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",  # Use default for static files
     },
 }
 
