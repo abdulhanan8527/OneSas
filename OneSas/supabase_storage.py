@@ -28,7 +28,9 @@ class SupabaseStorage(Storage):
     
     def _add_media_prefix(self, name):
         """Add media/ prefix if not already present and not a static file"""
-        if not name.startswith(('media/', 'static/')):
+        if name.startswith(('media/', 'static/')):
+            return name
+        if not name.startswith('media/'):
             return f"media/{name}"
         return name
     
@@ -51,8 +53,24 @@ class SupabaseStorage(Storage):
             normalized_name = self._normalize_path(name)
             url = f"{self.supabase_url}/storage/v1/object/{self.bucket_name}/{normalized_name}"
             
+            # Ensure we're at the beginning of the file
+            if hasattr(content, 'seek') and hasattr(content, 'tell'):
+                if content.tell() > 0:
+                    content.seek(0)
+            
             file_content = content.read()
+            
+            # Determine content type
             content_type = getattr(content, 'content_type', 'application/octet-stream')
+            if hasattr(content, 'name'):
+                if content.name.lower().endswith(('.jpg', '.jpeg')):
+                    content_type = 'image/jpeg'
+                elif content.name.lower().endswith('.png'):
+                    content_type = 'image/png'
+                elif content.name.lower().endswith('.gif'):
+                    content_type = 'image/gif'
+                elif content.name.lower().endswith('.webp'):
+                    content_type = 'image/webp'
             
             headers = self._get_headers(content_type)
             response = requests.post(url, headers=headers, data=file_content)
@@ -105,3 +123,9 @@ class SupabaseStorage(Storage):
     
     def get_available_name(self, name, max_length=None):
         return name
+    
+    def path(self, name):
+        """
+        This method is required by Django but not supported in cloud storage.
+        """
+        raise NotImplementedError("This backend doesn't support absolute paths.")

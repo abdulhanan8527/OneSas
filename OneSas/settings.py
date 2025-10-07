@@ -169,11 +169,13 @@ SUPABASE_KEY = os.environ.get("SUPABASE_KEY")
 SUPABASE_BUCKET = "one-sas"  # Replace with your actual bucket name
 
 DEFAULT_FILE_STORAGE = 'OneSas.supabase_storage.SupabaseStorage'
+STATICFILES_STORAGE = 'OneSas.supabase_storage.SupabaseStorage'  # Add this line
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-STATIC_URL = '/static/'
+# STATIC_URL = '/static/'
+STATIC_URL = f'{SUPABASE_URL}/storage/v1/object/public/{SUPABASE_BUCKET}/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # For production
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'OneSas_app/static'),
